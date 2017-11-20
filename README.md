@@ -1,0 +1,6 @@
+# push-server
+netty实现消息推送与长连接，心跳机制
+
+# 基本思路：
+
+netty服务端通过一个Map保存所有连接上来的客户端SocketChannel,客户端的Id作为Map的key。每次服务器端如果要向某个客户端发送消息，只需根据ClientId取出对应的SocketChannel,往里面写入message即可。心跳检测通过IdleEvent 事件，定时向服务端放送Ping消息，检测SocketChannel是否终断。
