@@ -9,6 +9,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2017/11/20
  */
 public class NettyServerBootstrap {
+
+    private static final Logger logger = LoggerFactory.getLogger(NettyServerBootstrap.class);
+
     private int port;
     private SocketChannel socketChannel;
     public NettyServerBootstrap(int port) throws InterruptedException {
@@ -44,15 +49,15 @@ public class NettyServerBootstrap {
         });
         ChannelFuture f= bootstrap.bind(port).sync();
         if(f.isSuccess()){
-            System.out.println("server start---------------");
+            logger.info("server start---------------");
         }
     }
     public static void main(String []args) throws InterruptedException {
-        NettyServerBootstrap bootstrap=new NettyServerBootstrap(9999);
+        NettyServerBootstrap bootstrap = new NettyServerBootstrap(9999);
         while (true){
-            SocketChannel channel=(SocketChannel)NettyChannelMap.get("001");
-            if(channel!=null){
-                AskMsg askMsg=new AskMsg();
+            SocketChannel channel = (SocketChannel)NettyChannelMap.get("001");
+            if(channel != null){
+                AskMsg askMsg = new AskMsg();
                 channel.writeAndFlush(askMsg);
             }
             TimeUnit.SECONDS.sleep(10);

@@ -14,6 +14,8 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +24,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2017/11/20
  */
 public class NettyClientBootstrap {
+
+    private static final Logger logger = LoggerFactory.getLogger(NettyClientBootstrap.class);
     private int port;
     private String host;
     private SocketChannel socketChannel;
@@ -50,7 +54,7 @@ public class NettyClientBootstrap {
         ChannelFuture future =bootstrap.connect(host,port).sync();
         if (future.isSuccess()) {
             socketChannel = (SocketChannel)future.channel();
-            System.out.println("connect server  成功---------");
+            logger.info("connect server  成功---------");
         }
     }
     public static void main(String[]args) throws InterruptedException {
