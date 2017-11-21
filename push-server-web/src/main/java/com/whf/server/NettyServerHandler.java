@@ -5,12 +5,17 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.util.ReferenceCountUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
 public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
+
+    private static final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);
+
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         NettyChannelMap.remove((SocketChannel) ctx.channel());
@@ -20,12 +25,12 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, BaseMsg baseMsg) throws Exception {
         if (MsgType.LOGIN.equals(baseMsg.getType())) {
             LoginMsg loginMsg = (LoginMsg) baseMsg;
-            if ("robin".equals(loginMsg.getUserName()) && "yao".equals(loginMsg.getPassword())) {
+            if ("wuhf".equals(loginMsg.getUserName()) && "123".equals(loginMsg.getPassword())) {
                 /**
                  * 登录成功,把channel存到服务端的map中.
                  */
                 NettyChannelMap.add(loginMsg.getClientId(), (SocketChannel) channelHandlerContext.channel());
-                System.out.println("client" + loginMsg.getClientId() + " 登录成功");
+                logger.info("client" + loginMsg.getClientId() + " 登录成功");
             }
         } else {
             if (NettyChannelMap.get(baseMsg.getClientId()) == null) {
@@ -58,7 +63,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
                 //收到客户端回复
                 ReplyMsg replyMsg = (ReplyMsg) baseMsg;
                 ReplyClientBody clientBody = (ReplyClientBody) replyMsg.getBody();
-                System.out.println("receive client msg: " + clientBody.getClientInfo());
+                logger.info("receive client msg: " + clientBody.getClientInfo());
             }
             break;
             case LOGIN:

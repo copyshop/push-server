@@ -4,12 +4,17 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
 public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
+
+    private static final Logger logger = LoggerFactory.getLogger(NettyClientHandler.class);
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
@@ -33,13 +38,13 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
             case LOGIN: {
                 //向服务器发起登录
                 LoginMsg loginMsg = new LoginMsg();
-                loginMsg.setPassword("yao");
-                loginMsg.setUserName("robin");
+                loginMsg.setPassword("123");
+                loginMsg.setUserName("wuhf");
                 channelHandlerContext.writeAndFlush(loginMsg);
             }
             break;
             case PING: {
-                System.out.println("receive ping from server----------");
+                logger.info("receive ping from server----------");
             }
             break;
             case ASK: {
@@ -52,7 +57,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
             case REPLY: {
                 ReplyMsg replyMsg = (ReplyMsg) baseMsg;
                 ReplyServerBody replyServerBody = (ReplyServerBody) replyMsg.getBody();
-                System.out.println("receive client msg: " + replyServerBody.getServerInfo());
+               logger.info("receive client msg: " + replyServerBody.getServerInfo());
             }
             default:
                 break;
