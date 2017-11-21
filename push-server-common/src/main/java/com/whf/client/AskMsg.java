@@ -2,6 +2,7 @@ package com.whf.client;
 
 /**
  * 请求类型的消息
+ *
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
@@ -10,6 +11,7 @@ public class AskMsg extends BaseMsg {
         super();
         setType(MsgType.ASK);
     }
+
     private AskParams params;
 
     public AskParams getParams() {

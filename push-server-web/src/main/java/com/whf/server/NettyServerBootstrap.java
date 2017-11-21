@@ -24,16 +24,17 @@ public class NettyServerBootstrap {
 
     private int port;
     private SocketChannel socketChannel;
+
     public NettyServerBootstrap(int port) throws InterruptedException {
         this.port = port;
         bind();
     }
 
     private void bind() throws InterruptedException {
-        EventLoopGroup boss=new NioEventLoopGroup();
-        EventLoopGroup worker=new NioEventLoopGroup();
-        ServerBootstrap bootstrap=new ServerBootstrap();
-        bootstrap.group(boss,worker);
+        EventLoopGroup boss = new NioEventLoopGroup();
+        EventLoopGroup worker = new NioEventLoopGroup();
+        ServerBootstrap bootstrap = new ServerBootstrap();
+        bootstrap.group(boss, worker);
         bootstrap.channel(NioServerSocketChannel.class);
         bootstrap.option(ChannelOption.SO_BACKLOG, 128);
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
@@ -47,16 +48,17 @@ public class NettyServerBootstrap {
                 p.addLast(new NettyServerHandler());
             }
         });
-        ChannelFuture f= bootstrap.bind(port).sync();
-        if(f.isSuccess()){
+        ChannelFuture f = bootstrap.bind(port).sync();
+        if (f.isSuccess()) {
             logger.info("server start---------------");
         }
     }
-    public static void main(String []args) throws InterruptedException {
+
+    public static void main(String[] args) throws InterruptedException {
         NettyServerBootstrap bootstrap = new NettyServerBootstrap(9999);
-        while (true){
-            SocketChannel channel = (SocketChannel)NettyChannelMap.get("001");
-            if(channel != null){
+        while (true) {
+            SocketChannel channel = (SocketChannel) NettyChannelMap.get("001");
+            if (channel != null) {
                 AskMsg askMsg = new AskMsg();
                 channel.writeAndFlush(askMsg);
             }

@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 /**
  * 必须实现序列,serialVersionUID 一定要有.
+ *
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
 
-public abstract class BaseMsg  implements Serializable {
+public abstract class BaseMsg implements Serializable {
     private static final long serialVersionUID = 1L;
     private MsgType type;
     /**

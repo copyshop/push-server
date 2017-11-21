@@ -6,8 +6,8 @@
         <groupId>com.whf</groupId>
         <artifactId>push-server</artifactId>
         <version>1.0-SNAPSHOT</version>
-	</parent>
-	
+    </parent>
+
     <groupId>com.whf</groupId>
     <artifactId>push-server-web</artifactId>
     <version>1.0-SNAPSHOT</version>
