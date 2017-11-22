@@ -1,6 +1,6 @@
 package com.whf.server;
 
-import com.whf.client.*;
+import com.whf.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.SocketChannel;
@@ -30,7 +30,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
                  * 登录成功,把channel存到服务端的map中.
                  */
                 NettyChannelMap.add(loginMsg.getClientId(), (SocketChannel) channelHandlerContext.channel());
-                logger.info("client" + loginMsg.getClientId() + " 登录成功");
+                logger.info("util" + loginMsg.getClientId() + " 登录成功");
             }
         } else {
             if (NettyChannelMap.get(baseMsg.getClientId()) == null) {
@@ -63,7 +63,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
                 //收到客户端回复
                 ReplyMsg replyMsg = (ReplyMsg) baseMsg;
                 ReplyClientBody clientBody = (ReplyClientBody) replyMsg.getBody();
-                logger.info("receive client msg: " + clientBody.getClientInfo());
+                logger.info("receive util msg: " + clientBody.getClientInfo());
             }
             break;
             case LOGIN:

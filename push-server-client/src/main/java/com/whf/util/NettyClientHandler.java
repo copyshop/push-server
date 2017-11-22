@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -48,7 +48,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
             }
             break;
             case ASK: {
-                ReplyClientBody replyClientBody = new ReplyClientBody("client info **** !!!");
+                ReplyClientBody replyClientBody = new ReplyClientBody("util info **** !!!");
                 ReplyMsg replyMsg = new ReplyMsg();
                 replyMsg.setBody(replyClientBody);
                 channelHandlerContext.writeAndFlush(replyMsg);
@@ -57,7 +57,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
             case REPLY: {
                 ReplyMsg replyMsg = (ReplyMsg) baseMsg;
                 ReplyServerBody replyServerBody = (ReplyServerBody) replyMsg.getBody();
-               logger.info("receive client msg: " + replyServerBody.getServerInfo());
+               logger.info("receive util msg: " + replyServerBody.getServerInfo());
             }
             default:
                 break;

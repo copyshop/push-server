@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 /**
  * 登录验证类型的消息

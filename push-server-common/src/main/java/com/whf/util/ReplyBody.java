@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 import java.io.Serializable;
 

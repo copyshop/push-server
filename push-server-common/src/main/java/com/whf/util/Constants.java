@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 /**
  * @author whfstudio@163.com

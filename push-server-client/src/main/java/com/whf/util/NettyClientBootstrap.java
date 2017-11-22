@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;

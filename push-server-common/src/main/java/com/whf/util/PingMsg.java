@@ -1,4 +1,4 @@
-package com.whf.client;
+package com.whf.util;
 
 /**
  * 心跳检测的消息类型.
