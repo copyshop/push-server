@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+	<bean name="pushServerConfig" class="com.whf.entity.PushServerConfig">
+		<property name="ip" value="127.0.0.1" />
+		<property name="port" value="9998" />
+		<property name="retryDelay" value="5" />
+	</bean>
+</beans>
