@@ -1,4 +1,4 @@
-package com.whf.util;
+package com.whf.common.util;
 
 /**
  * 请求类型的消息

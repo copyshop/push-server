@@ -1,5 +1,7 @@
-package com.whf.util;
+package com.whf.client;
 
+import com.whf.common.util.*;
+import com.whf.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -35,6 +37,21 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, BaseMsg baseMsg) throws Exception {
         MsgType msgType = baseMsg.getType();
         switch (msgType) {
+
+            case REQUEST: {
+                AskMsg askMsg = (AskMsg) baseMsg;
+                //反馈
+                ReplyMsg replyMsg=new ReplyMsg();
+                replyMsg.setRequestId(askMsg.getRequestId());
+                replyMsg.setClientId(askMsg.getClientId());
+                replyMsg.setType(MsgType.REQUEST);
+                String resultJsonStr = PushServerRequestHandler.processRequest(askMsg.getData());
+                replyMsg.setData(resultJsonStr);
+                channelHandlerContext.writeAndFlush(replyMsg);
+                //释放
+                ReferenceCountUtil.release(baseMsg);
+            }
+            break;
             case LOGIN: {
                 //向服务器发起登录
                 LoginMsg loginMsg = new LoginMsg();

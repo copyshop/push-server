@@ -1,5 +1,9 @@
-package com.whf.util;
+package com.whf.client;
 
+import com.whf.common.util.AskMsg;
+import com.whf.common.util.AskParams;
+import com.whf.common.util.Constants;
+import com.whf.common.util.LoginMsg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

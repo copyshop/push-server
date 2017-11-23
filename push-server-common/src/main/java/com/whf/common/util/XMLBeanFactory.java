@@ -1,4 +1,4 @@
-package com.whf.util;
+package com.whf.common.util;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

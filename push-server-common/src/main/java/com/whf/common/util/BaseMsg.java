@@ -1,4 +1,4 @@
-package com.whf.util;
+package com.whf.common.util;
 
 import java.io.Serializable;
 
@@ -16,6 +16,10 @@ public abstract class BaseMsg implements Serializable {
      * 必须唯一，否者会出现channel调用混乱.
      */
     private String clientId;
+
+    private String requestId;
+
+    private String data;
 
     /**
      * 初始化客户端id.
@@ -38,5 +42,21 @@ public abstract class BaseMsg implements Serializable {
 
     public void setType(MsgType type) {
         this.type = type;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

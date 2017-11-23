@@ -1,6 +1,6 @@
 package com.whf.server;
 
-import com.whf.util.AskMsg;
+import com.whf.common.util.AskMsg;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

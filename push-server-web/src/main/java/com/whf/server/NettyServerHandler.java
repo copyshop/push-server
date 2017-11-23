@@ -1,6 +1,8 @@
 package com.whf.server;
 
-import com.whf.util.*;
+import com.whf.common.sync.SyncWriteFuture;
+import com.whf.common.sync.SyncWriteMap;
+import com.whf.common.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.SocketChannel;
@@ -42,6 +44,16 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
             }
         }
         switch (baseMsg.getType()) {
+
+            case REQUEST: {
+                String requestId = baseMsg.getRequestId();
+                SyncWriteFuture future = (SyncWriteFuture) SyncWriteMap.syncKey.get(requestId);
+                if (future != null) {
+                    future.setResponse(baseMsg);
+                }
+            }
+            break;
+
             case PING: {
                 PingMsg pingMsg = (PingMsg) baseMsg;
                 PingMsg replyPing = new PingMsg();
