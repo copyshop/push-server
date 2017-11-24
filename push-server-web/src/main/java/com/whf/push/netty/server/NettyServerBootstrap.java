@@ -1,4 +1,4 @@
-package com.whf.server;
+package com.whf.push.netty.server;
 
 import com.whf.common.util.AskMsg;
 import io.netty.bootstrap.ServerBootstrap;

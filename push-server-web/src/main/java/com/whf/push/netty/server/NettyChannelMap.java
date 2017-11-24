@@ -1,4 +1,4 @@
-package com.whf.server;
+package com.whf.push.netty.server;
 
 import io.netty.channel.Channel;
 import io.netty.channel.socket.SocketChannel;
