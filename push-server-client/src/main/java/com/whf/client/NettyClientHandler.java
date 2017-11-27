@@ -1,7 +1,6 @@
 package com.whf.client;
 
 import com.whf.common.util.*;
-import com.whf.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -80,5 +79,14 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
                 break;
         }
         ReferenceCountUtil.release(msgType);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+       logger.error("in client exceptionCaught.");
+        super.exceptionCaught(ctx, cause);
+        /**
+         * 出现异常时，可以发送或者记录相关日志信息，之后，直接断开该链接，并重新登录请求，建立通道.
+         */
     }
 }

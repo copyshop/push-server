@@ -20,6 +20,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        logger.error("in channelInactive.");
         NettyChannelMap.remove((SocketChannel) ctx.channel());
     }
 
@@ -84,5 +85,13 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
                 break;
         }
         ReferenceCountUtil.release(baseMsg);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        logger.error("in here has an error.");
+        NettyChannelMap.remove((SocketChannel)ctx.channel());
+        super.exceptionCaught(ctx, cause);
+        logger.error("channel is exception over. (SocketChannel)ctx.channel()=" + (SocketChannel)ctx.channel());
     }
 }
