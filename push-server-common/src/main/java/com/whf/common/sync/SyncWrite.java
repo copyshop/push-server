@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by fuzhengwei1 on 2016/10/20.
+ * @author whfstudio@163.com
+ * @date 2017/11/27
  */
 public class SyncWrite {
 

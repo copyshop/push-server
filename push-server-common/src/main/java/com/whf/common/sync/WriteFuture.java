@@ -6,7 +6,8 @@ import com.whf.common.util.BaseMsg;
 import java.util.concurrent.Future;
 
 /**
- * Created by fuzhengwei1 on 2016/10/20.
+ * @author whfstudio@163.com
+ * @date 2017/11/27
  */
 public interface WriteFuture<T> extends Future<T> {
 

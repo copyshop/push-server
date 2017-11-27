@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 请求future Map
- * @author wujianbo
+ * @author whfstudio@163.com
+ * @date 2017/11/27
  */
 public class SyncWriteMap {
 
