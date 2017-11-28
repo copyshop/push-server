@@ -32,13 +32,28 @@ public class NettyClientBootstrap {
     private Bootstrap bootstrap;
     private NioEventLoopGroup workGroup = new NioEventLoopGroup(4);
 
+    static {
+        Config config = new Config(true);
+        PushServerConfig pushServerConfig = config.getPushServerConfig();
+        IamConfig iamConfig = config.getIamConfig();
+        ConnectorConfig connectorConfig = config.getConnectorConfig();
+        port = pushServerConfig.getPort();
+        host = pushServerConfig.getIp();
+        retryDelay = pushServerConfig.getRetryDelay();
+        connectorName = connectorConfig.getName();
+        publicKey = iamConfig.getPublicKey();
+
+        //使用 connector name 作为客户端唯一标识
+        Constants.setClientId(connectorConfig.getName());
+    }
+
     public NettyClientBootstrap(int port, String host) throws InterruptedException {
         this.port = port;
         this.host = host;
         start();
     }
 
-    private void start() throws InterruptedException {
+    public void start() throws InterruptedException {
 
         bootstrap = new Bootstrap();
         bootstrap.channel(NioSocketChannel.class);
