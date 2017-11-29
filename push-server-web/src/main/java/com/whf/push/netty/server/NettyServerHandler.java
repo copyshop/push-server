@@ -51,6 +51,9 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
         switch (baseMsg.getType()) {
 
             case REQUEST: {
+                /**
+                 * 匹配请求.
+                 */
                 String requestId = baseMsg.getRequestId();
                 SyncWriteFuture future = (SyncWriteFuture) SyncWriteMap.syncKey.get(requestId);
                 if (future != null) {

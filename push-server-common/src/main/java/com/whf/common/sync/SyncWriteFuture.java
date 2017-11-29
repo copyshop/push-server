@@ -102,6 +102,11 @@ public class SyncWriteFuture  implements WriteFuture<BaseMsg>  {
         return null;
     }
 
+    /**
+     * 同步写入，如果正常情况下，应该不会有什么问题，但是如异常发生了，可能导致的一个结果就是writeRecords会越来越大，<br></>
+     * 所以需要有一个Timer去定时清理，为此我们需要为每个SyncWriteFuture设置timeout时间，方便做清理工作。
+     * @return
+     */
     @Override
     public boolean isTimeout() {
         if (isTimeout) {
