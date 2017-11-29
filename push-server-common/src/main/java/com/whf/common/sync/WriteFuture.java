@@ -6,6 +6,7 @@ import com.whf.common.util.BaseMsg;
 import java.util.concurrent.Future;
 
 /**
+ * Future的实现的阻塞可以通过CountDownLatch来实现.
  * @author whfstudio@163.com
  * @date 2017/11/27
  */
