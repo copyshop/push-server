@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * 自定义Future,使用CountDownLatch实现<br></>
+ * 目的是response的响应的阻塞.
  * @author whfstudio@163.com
  * @date 2017/11/27
  */

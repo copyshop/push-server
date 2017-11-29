@@ -27,13 +27,17 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, BaseMsg baseMsg) throws Exception {
         if (MsgType.LOGIN.equals(baseMsg.getType())) {
+
+            /**
+             * 实现登录成功的逻辑.
+             */
             LoginMsg loginMsg = (LoginMsg) baseMsg;
             if ("wuhf".equals(loginMsg.getUserName()) && "123".equals(loginMsg.getPassword())) {
                 /**
                  * 登录成功,把channel存到服务端的map中.
                  */
                 NettyChannelMap.add(loginMsg.getClientId(), (SocketChannel) channelHandlerContext.channel());
-                logger.info("util" + loginMsg.getClientId() + " 登录成功");
+                logger.info("client:{}" + loginMsg.getClientId() + " 登录成功");
             }
         } else {
             if (NettyChannelMap.get(baseMsg.getClientId()) == null) {
@@ -81,8 +85,10 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<BaseMsg> {
             break;
             case LOGIN:
                 break;
-            default:
-                break;
+            default:{
+                NettyChannelMap.remove((SocketChannel)channelHandlerContext.channel());
+                channelHandlerContext.disconnect();
+            }break;
         }
         ReferenceCountUtil.release(baseMsg);
     }

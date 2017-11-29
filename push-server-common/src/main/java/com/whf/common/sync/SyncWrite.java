@@ -6,6 +6,8 @@ import com.whf.common.util.ReplyMsg;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeoutException;
  * @date 2017/11/27
  */
 public class SyncWrite {
+    protected Logger logger = LoggerFactory.getLogger(SyncWrite.class);
 
     public ReplyMsg writeAndSync(final Channel channel, final AskMsg askMsg, final long timeout) throws Exception {
 
@@ -35,7 +38,7 @@ public class SyncWrite {
         WriteFuture<BaseMsg> future = new SyncWriteFuture(askMsg.getRequestId());
         SyncWriteMap.syncKey.put(askMsg.getRequestId(), future);
 
-        System.out.println("发起请求，请求id：" + requestId + "，请求参数：" + askMsg.getData());
+        logger.info("发起请求，请求id：" + requestId + "，请求参数：" + askMsg.getData());
 
         ReplyMsg response = doWriteAndSync(channel, askMsg, timeout, future);
 
