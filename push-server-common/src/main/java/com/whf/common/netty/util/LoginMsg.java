@@ -1,4 +1,4 @@
-package com.whf.common.util;
+package com.whf.common.netty.util;
 
 /**
  * 登录验证类型的消息

@@ -1,4 +1,4 @@
-package com.whf.common.util;
+package com.whf.common.netty.util;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

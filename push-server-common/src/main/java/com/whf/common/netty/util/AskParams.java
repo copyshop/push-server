@@ -1,4 +1,4 @@
-package com.whf.common.util;
+package com.whf.common.netty.util;
 
 import java.io.Serializable;
 

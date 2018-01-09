@@ -1,4 +1,4 @@
-package com.whf.common.util;
+package com.whf.common.netty.util;
 
 public class Messages {
     public static int SUCCESS_CODE = 0;

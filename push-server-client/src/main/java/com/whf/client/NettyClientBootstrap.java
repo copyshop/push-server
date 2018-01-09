@@ -1,9 +1,9 @@
 package com.whf.client;
 
-import com.whf.common.util.AskMsg;
-import com.whf.common.util.AskParams;
-import com.whf.common.util.Constants;
-import com.whf.common.util.LoginMsg;
+import com.whf.common.netty.util.AskMsg;
+import com.whf.common.netty.util.AskParams;
+import com.whf.common.netty.util.Constants;
+import com.whf.common.netty.util.LoginMsg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -28,23 +28,24 @@ public class NettyClientBootstrap {
 
     private int port;
     private String host;
+    private int retryDelay;
     private SocketChannel socketChannel;
     private Bootstrap bootstrap;
     private NioEventLoopGroup workGroup = new NioEventLoopGroup(4);
 
     static {
-        Config config = new Config(true);
-        PushServerConfig pushServerConfig = config.getPushServerConfig();
-        IamConfig iamConfig = config.getIamConfig();
-        ConnectorConfig connectorConfig = config.getConnectorConfig();
-        port = pushServerConfig.getPort();
-        host = pushServerConfig.getIp();
-        retryDelay = pushServerConfig.getRetryDelay();
-        connectorName = connectorConfig.getName();
-        publicKey = iamConfig.getPublicKey();
-
-        //使用 connector name 作为客户端唯一标识
-        Constants.setClientId(connectorConfig.getName());
+//        Config config = new Config(true);
+//        PushServerConfig pushServerConfig = config.getPushServerConfig();
+//        IamConfig iamConfig = config.getIamConfig();
+//        ConnectorConfig connectorConfig = config.getConnectorConfig();
+//        port = pushServerConfig.getPort();
+//        host = pushServerConfig.getIp();
+//        retryDelay = pushServerConfig.getRetryDelay();
+//        connectorName = connectorConfig.getName();
+//        publicKey = iamConfig.getPublicKey();
+//
+//        //使用 connector name 作为客户端唯一标识
+//        Constants.setClientId(connectorConfig.getName());
     }
 
     public NettyClientBootstrap(int port, String host) throws InterruptedException {
@@ -56,23 +57,11 @@ public class NettyClientBootstrap {
     public void start() throws InterruptedException {
 
         bootstrap = new Bootstrap();
-        bootstrap.channel(NioSocketChannel.class);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-        bootstrap.group(workGroup);
-        bootstrap.remoteAddress(host, port);
-        bootstrap.handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel socketChannel) throws Exception {
-                /**
-                 * IdleStateHandler检测心跳.
-                 */
-                socketChannel.pipeline().addLast(new IdleStateHandler(20, 10, 0));
-                socketChannel.pipeline().addLast(new ObjectEncoder());
-                socketChannel.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
-                socketChannel.pipeline().addLast(new NettyClientHandler());
-            }
-        });
-
+        bootstrap.channel(NioSocketChannel.class)
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .group(workGroup)
+                .remoteAddress(host, port)
+                .handler(new NettyClientInitializer());
         doConnect(port, host);
     }
 

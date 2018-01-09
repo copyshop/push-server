@@ -1,4 +1,4 @@
-package com.whf.common.sync;
+package com.whf.common.netty.sync;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

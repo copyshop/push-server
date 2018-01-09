@@ -1,6 +1,6 @@
 package com.whf.client;
 
-import com.whf.common.util.*;
+import com.whf.common.netty.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;

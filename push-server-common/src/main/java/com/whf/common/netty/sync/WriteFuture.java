@@ -1,7 +1,7 @@
-package com.whf.common.sync;
+package com.whf.common.netty.sync;
 
 
-import com.whf.common.util.BaseMsg;
+import com.whf.common.netty.util.BaseMsg;
 
 import java.util.concurrent.Future;
 

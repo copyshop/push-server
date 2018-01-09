@@ -1,8 +1,8 @@
 package com.whf.push.netty.server;
 
-import com.whf.common.sync.SyncWriteFuture;
-import com.whf.common.sync.SyncWriteMap;
-import com.whf.common.util.*;
+import com.whf.common.netty.sync.SyncWriteFuture;
+import com.whf.common.netty.sync.SyncWriteMap;
+import com.whf.common.netty.util.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.SocketChannel;
