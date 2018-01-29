@@ -1,10 +1,13 @@
 package com.whf.common.netty.util;
 
+import com.alibaba.fastjson.annotation.JSONType;
+
 /**
  * 登录验证类型的消息
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
+@JSONType(typeName = "loginMsg")
 public class LoginMsg extends BaseMsg {
     private String userName;
     private String password;
