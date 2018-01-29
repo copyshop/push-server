@@ -1,5 +1,7 @@
 package com.whf.common.netty.util;
 
+import com.alibaba.fastjson.annotation.JSONType;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
-
+@JSONType(seeAlso = {AskMsg.class,LoginMsg.class,ReplyMsg.class,PingMsg.class})
 public abstract class BaseMsg implements Serializable {
     private static final long serialVersionUID = 1L;
     private MsgType type;

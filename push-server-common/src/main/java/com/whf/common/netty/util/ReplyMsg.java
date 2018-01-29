@@ -1,9 +1,12 @@
 package com.whf.common.netty.util;
 
+import com.alibaba.fastjson.annotation.JSONType;
+
 /**
  * @author whfstudio@163.com
  * @date 2017/11/20
  */
+@JSONType(typeName = "replyMsg")
 public class ReplyMsg extends BaseMsg {
     public ReplyMsg() {
         super();
